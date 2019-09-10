@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class cannonController : MonoBehaviour
 {
-    public GameObject piggyplayer; // reference to player object
+    public Rigidbody2D piggyplayerRB; // reference to player object
     public GameObject mousepos;
-    public float strenth = 100;
+    public Camera mainCamera;
+    const float STRENTH = 100;
+    const int ANGLEMAX = 80;
+    const int ANGLEMIN = 10;
     float alpha;
     Vector3 mousePosition, mousePosInWorld,direction;
     // Start is called before the first frame update
@@ -19,23 +22,28 @@ public class cannonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f);
-        mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosition);
+        mousePosition = new Vector3(Input.mousePosition.x,
+            Input.mousePosition.y, -mainCamera.transform.position.z);
+        mousePosInWorld = mainCamera.ScreenToWorldPoint(mousePosition);
         direction = mousePosInWorld - transform.position;
         alpha = Mathf.Acos(Vector3.Dot(Vector3.right, direction.normalized))*Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, alpha));
-
-        if (Input.GetMouseButtonUp(0))
+        if (alpha <= ANGLEMAX && alpha > ANGLEMIN && direction.y>0)
         {
-            piggyplayer.transform.parent = null;
-            piggyplayer.GetComponent<Rigidbody2D>().gravityScale = 1;
-            piggyplayer.GetComponent<Rigidbody2D>().AddForce(direction * strenth);
-        }
+         transform.rotation = Quaternion.Euler(new Vector3(0, 0, alpha));
+        }            
         /*****
         mousepos.transform.position = mousePosInWorld;
         this.transform.LookAt(mousepos.transform);
+        */ //lookat method
+    }
+    void FixedUpdate()
+    {
+        if (Input.GetButtonUp("Fire1"))
+        {
+            piggyplayerRB.transform.parent = null;
+            piggyplayerRB.gravityScale = 1;
+            piggyplayerRB.AddForce(direction * STRENTH * piggyplayerRB.mass);
+        }
 
-       
-         */ //lookat method
     }
 }
