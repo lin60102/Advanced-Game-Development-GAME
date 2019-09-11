@@ -11,6 +11,7 @@ public class PiiggyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         cannon = transform.parent;
         pos = transform.position;
         rota = transform.rotation;
@@ -23,8 +24,10 @@ public class PiiggyController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        StartCoroutine("Resetpiggywait");
-        //Invoke("ResetPiggy", 3);
+        
+        ScoreManeger.instance.Score++;
+       // StartCoroutine("Resetpiggywait");
+        Invoke("ResetPiggy", 3);
         //Destroy(gameObject, 3);
     }
     void ResetPiggy()
@@ -32,6 +35,8 @@ public class PiiggyController : MonoBehaviour
         transform.position = pos;
         transform.rotation = rota;
         GetComponent<Rigidbody2D>().gravityScale = 0;
+        GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0);
+        GetComponent<Rigidbody2D>().angularVelocity = 0;
         transform.parent = transform;
     }
     IEnumerator Resetpiggywait()
@@ -40,6 +45,8 @@ public class PiiggyController : MonoBehaviour
         transform.position = pos;
         transform.rotation = rota;
         GetComponent<Rigidbody2D>().gravityScale = 0;
+        GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0);
+        GetComponent<Rigidbody2D>().angularVelocity = 0;
         transform.parent = transform;
 
     }

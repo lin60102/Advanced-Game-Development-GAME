@@ -12,9 +12,9 @@ public class FollowPiggy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 goal = new Vector3(Piggy.position.x, transform.position.y, transform.position.z);
-        transform.position = Vector3.Lerp(transform.position, goal, Time.deltaTime*5);
+        transform.position = Vector3.Lerp(transform.position, goal, 0.1f);
     }
 }
