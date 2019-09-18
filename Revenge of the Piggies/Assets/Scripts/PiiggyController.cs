@@ -7,6 +7,8 @@ public class PiiggyController : MonoBehaviour
     Vector3 pos;
     Quaternion rota;
     Transform cannon;
+    public ScoreManeger scoremanager;
+    public LevelManeger lvmag;
     const float WAITTIME=3;
     // Start is called before the first frame update
     void Start()
@@ -24,14 +26,17 @@ public class PiiggyController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        ScoreManeger.instance.Score++;
+
+        scoremanager.updateScore(1);
+        ///ScoreManeger.instance.Score++;
        // StartCoroutine("Resetpiggywait");
         Invoke("ResetPiggy", 3);
+        
         //Destroy(gameObject, 3);
     }
     void ResetPiggy()
     {
+        lvmag.Updatelv(1);
         transform.position = pos;
         transform.rotation = rota;
         GetComponent<Rigidbody2D>().gravityScale = 0;
