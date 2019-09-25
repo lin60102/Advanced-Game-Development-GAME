@@ -23,6 +23,7 @@ public abstract class Subject :MonoBehaviour
         foreach (Observer ob in observers)
         {
             ob.OnNotfiy(o, n);
+            Debug.Log("n : " + n + " o : " + o);
         }
     }
 

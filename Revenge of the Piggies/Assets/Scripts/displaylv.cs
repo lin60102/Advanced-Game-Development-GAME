@@ -10,6 +10,7 @@ public class displaylv : Observer
         if (n == NotificationType.LevelUpdated)
         {
             GetComponent<TextMeshProUGUI>().text = "LV: " + o;
+           // Debug.Log("n : " + n + " o : " + o);
         }
 
     }

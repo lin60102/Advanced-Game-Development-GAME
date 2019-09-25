@@ -15,7 +15,9 @@ public class LevelManeger : Subject
     }
     public void Updatelv(int lvpoint)
     {
-        lv += lvpoint;
+        Debug.Log(lvpoint);
+        lv =lv+ lvpoint;
+        Debug.Log(lv);
         Notify(lv, NotificationType.LevelUpdated);
     }
 }
