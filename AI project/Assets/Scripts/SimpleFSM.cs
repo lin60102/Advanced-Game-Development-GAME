@@ -1,55 +1,22 @@
-// Copyright (c) 2014-2015, coAdjoint Ltd
-// All rights reserved.
-// 
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided that the following conditions are met:
-// 
-// 1. Redistributions of source code must retain the above copyright notice,
-// this list of conditions and the following disclaimer.
-// 
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-// POSSIBILITY OF SUCH DAMAGE.
 
 using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-/// <summary>
-/// Simple FSM
-/// 
-/// Idea is to start long running and repetitive tasks when we enter a state.
-/// Implement tasks using coroutines.
-/// Problem: need to interrupt and kill these tasks when we change state!
-/// Solution: Use coroutine manager (Prime31) to stop coroutines
-/// Benefits over other FSM implementations: no complicated boolean logic to control states
-/// - No problems cleaning up code when we enter a new state 
-/// - Highly customisable logic when changing state
-/// - Coroutines are used to perform tasks over many frames
-/// 
-/// </summary>
 
 public class SimpleFSM : MonoBehaviour {
 	
 	private UnityEngine.AI.NavMeshAgent guard;	
 	private Transform _transform;
 
-	// States of the Guard implemented as Prime31 coroutine jobs
+	
 	private Job hear;
 	private Job see;	
 	private Job patrol;	
 	private Job investigate;
 
-	//Used to control rotation and movement of character
+	
 	private BotFreeMovementMotor guard_motor;
 
 	private BotNavigation botNav;
@@ -83,7 +50,7 @@ public class SimpleFSM : MonoBehaviour {
 
 	public Transform player;	
 		
-	//This is the current state of the Guard
+	
 	public enum State
 	{
 		Patrol, //= green
@@ -91,7 +58,7 @@ public class SimpleFSM : MonoBehaviour {
 		Alert // = red
 	}
 
-	//Uses a property to fire enter and exit state methods when we enter a new state (and thus exit the previous one)
+	
 	public State _state;
 	public State state
 	{
@@ -118,7 +85,7 @@ public class SimpleFSM : MonoBehaviour {
 		
 		_transform = transform;
 
-		//Explicitly set state so that we call the EnterState method
+		
 		state = State.Patrol;
 
 		raycastLayerMask = ~raycastLayerMask;

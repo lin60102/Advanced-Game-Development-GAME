@@ -2,7 +2,7 @@
 using UnityEditor;
 using System.Collections;
 
-//This editor visualises the hearing and sight range of the guard
+
 [CustomEditor(typeof(SimpleFSM))]
 public class SimpleFSMEditor : Editor {
 	

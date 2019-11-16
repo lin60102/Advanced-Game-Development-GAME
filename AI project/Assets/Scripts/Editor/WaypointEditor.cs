@@ -2,8 +2,8 @@
 using UnityEditor;
 using System.Collections;
 
-// This Editor visualises the way points of the guard. We can then move the waypoints as if they were transforms without having the overhead
-// of using actual game objects to create waypoints.
+
+
 [CanEditMultipleObjects]
 [CustomEditor(typeof(BotNavigation))]
 public class WaypointEditor : Editor {
@@ -47,7 +47,7 @@ public class WaypointEditor : Editor {
 
 				Handles.SphereCap(0, botNav.wayPoints[i],Quaternion.identity, 0.5f);
 
-				//Handles.Label(botNav.wayPoints[i] + new Vector3(0f,3f,0f),(i+1).ToString() + ".", DemoResources.wayPointLabelStyle);
+				
 
 			}
 
